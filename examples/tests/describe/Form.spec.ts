@@ -1,9 +1,9 @@
 import { test, expect, Page } from "@playwright/test";
 
-const someName = "Shahnewaz";
-const someEmail = "shahnewaz@email.com";
-const someComment = "This is a feedback comment.";
-const someHighlights = "The website is user-friendly and visually appealing.";
+const name = "Shahnewaz";
+const email = "shahnewaz@email.com";
+const comment = "This is a feedback comment.";
+const highlights = "The website is user-friendly and visually appealing.";
 
 test.describe("Form is submitted successfully", () => {
   test("Required fields", async ({ page }) => {
@@ -94,16 +94,16 @@ async function clickButton(
 
 async function completeFields(page: Page) {
   const nameLabel = page.getByLabel("name");
-  await nameLabel.fill(someName);
+  await nameLabel.fill(name);
 
   const emailLabel = page.getByLabel("email");
-  await emailLabel.fill(someEmail);
+  await emailLabel.fill(email);
 
   const commentLabel = page.getByLabel("comment");
-  await commentLabel.fill(someComment);
+  await commentLabel.fill(comment);
 
   const highlightsLabel = page.getByLabel("highlights");
-  await highlightsLabel.fill(someHighlights);
+  await highlightsLabel.fill(highlights);
 
   const checkBox = page.getByRole("checkbox", { name: "I agree" });
   await checkBox.check();
@@ -120,10 +120,10 @@ async function checkIfItemsNotEmpty(page: Page) {
 
   const checkBox = page.getByRole("checkbox", { name: "I agree" });
 
-  await expect(nameLabel).toHaveValue(someName);
-  await expect(emailLabel).toHaveValue(someEmail);
-  await expect(commentLabel).toHaveValue(someComment);
-  await expect(highlightsLabel).toHaveValue(someHighlights);
+  await expect(nameLabel).toHaveValue(name);
+  await expect(emailLabel).toHaveValue(email);
+  await expect(commentLabel).toHaveValue(comment);
+  await expect(highlightsLabel).toHaveValue(highlights);
   await expect(checkBox).toBeChecked();
 }
 
