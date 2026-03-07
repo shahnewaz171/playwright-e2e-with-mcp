@@ -1,5 +1,7 @@
 import test, { expect } from "@playwright/test";
 
+test.describe.configure({ mode: "parallel" }); // Run tests in parallel within this describe block. Each test will run in its own worker thread, allowing for faster execution. This is especially useful when you have a large number of tests that can be executed concurrently without dependencies on each other.
+
 test.beforeAll(async () => {
   console.log("Initial settings or setup can be done here");
   await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate async setup
