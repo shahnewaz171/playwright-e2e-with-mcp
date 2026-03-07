@@ -1,16 +1,21 @@
 import test, { expect } from "@playwright/test";
 
-test("Get by rule practice - heading", async ({ page }) => {
-  await page.goto("");
+test.beforeAll(async () => {
+  console.log("Initial settings or setup can be done here");
+  await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate async setup
+});
 
+test.beforeEach(async ({ page }) => {
+  await page.goto("");
+});
+
+test("Get by rule practice - heading", async ({ page }) => {
   const heading = page.getByRole("heading", { name: "our services" });
 
   await expect(heading).toBeVisible();
 });
 
 test("Get by rule practice - List", async ({ page }) => {
-  await page.goto("");
-
   const list = page.getByRole("list");
   await expect(list).toBeVisible();
 
@@ -23,8 +28,6 @@ test("Get by rule practice - List", async ({ page }) => {
 });
 
 test("Get by rule practice - cookie banner", async ({ page }) => {
-  await page.goto("");
-
   const acceptCookieBanner = page.getByRole("button", {
     name: "Accept",
     exact: true, // Use it for case-sensitive and whole-string matching
@@ -41,8 +44,6 @@ test("Get by rule practice - cookie banner", async ({ page }) => {
 });
 
 test("Get by rule practice - anchor", async ({ page }) => {
-  await page.goto("");
-
   await page.getByRole("button", { name: "Decline" }).click();
 
   await page.getByRole("link", { name: "Go to Feedback Form" }).click();
@@ -52,4 +53,12 @@ test("Get by rule practice - anchor", async ({ page }) => {
   // await expect(
   //   page.getByRole("button", { name: "Save Progress" }),
   // ).toBeVisible();
+});
+
+test.afterEach(async ({ page }) => {
+  console.log("Test completed. You can perform cleanup tasks here if needed.");
+});
+
+test.afterAll(async () => {
+  console.log("Close database connections or perform cleanup tasks here");
 });
