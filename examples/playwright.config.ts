@@ -14,6 +14,9 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:5001",
     headless: false,
+    locale: "en-US",
+    defaultBrowserType: "chromium",
+    viewport: { width: 1280, height: 720 },
     launchOptions: {
       slowMo: 1000,
     },
