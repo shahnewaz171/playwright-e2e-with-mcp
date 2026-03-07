@@ -2,6 +2,9 @@ import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./tests",
+  reporter: "html",
+  // grep: /Tag locator/, // we can run tests with test title matching the regex pattern
+  // grepInvert: /Tag locator/, // we can run tests with test title not matching the regex pattern
   webServer: {
     command: "pnpm run start",
     url: "http://localhost:5001",

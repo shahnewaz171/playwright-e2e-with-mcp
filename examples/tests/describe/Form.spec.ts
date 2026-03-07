@@ -5,7 +5,17 @@ const email = "shahnewaz@email.com";
 const comment = "This is a feedback comment.";
 const highlights = "The website is user-friendly and visually appealing.";
 
+test.beforeEach(() => {
+  console.log("This runs before each test in this file");
+});
+
 test.describe("Form is submitted successfully", () => {
+  test.beforeEach(() => {
+    console.log(
+      "This runs before each test in the 'Form is submitted successfully' describe block",
+    );
+  });
+
   test("Required fields", async ({ page }) => {
     let formSubmitted = false;
 
