@@ -7,7 +7,7 @@ export default defineConfig({
     url: "http://localhost:5001",
     reuseExistingServer: true,
   },
-  timeout: 5000,
+  // timeout: 5000,
   use: {
     baseURL: "http://localhost:5001",
     headless: false,
