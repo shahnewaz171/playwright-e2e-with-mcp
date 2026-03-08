@@ -1,7 +1,9 @@
-
-# Playwright
+.env
+.vscode
 .DS_Store
 */node_modules/
+
+# Playwright
 */test-results/
 */playwright-report/
 */blob-report/
