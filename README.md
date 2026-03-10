@@ -1,1 +1,1 @@
-# playwright-e2e-with-mcp
+# playwright-e2e

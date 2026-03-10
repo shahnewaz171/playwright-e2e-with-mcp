@@ -10,6 +10,10 @@ const authFile = path.resolve(__dirname, "playwright/.auth/user.json");
 import dotenv from "dotenv";
 dotenv.config({ path: path.resolve(__dirname, ".env") });
 
+const baseURL = process.env.BASE_URL;
+const slowMo = process.env.SLOW_MO ? parseInt(process.env.SLOW_MO) : 0;
+const startLocalServer = baseURL === 'http://localhost:8080';
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -28,11 +32,15 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: "https://valentinos-magic-beans.click/",
+    baseURL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
+    headless: !!process.env.CI, // headless is for enabling the browser UI when running tests locally, and disable it when running tests on CI
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
     testIdAttribute: "data-test-id",
+    launchOptions: slowMo ? { slowMo } : undefined,
   },
 
   /* Configure projects for major browsers */
@@ -93,9 +101,12 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+webServer: startLocalServer
+    ? {
+        command: 'npm run dev -- --host 127.0.0.1 --port 8080 --strictPort',
+        url: baseURL,
+        reuseExistingServer: true,
+        timeout: 120_000,
+      }
+    : undefined,
 });
